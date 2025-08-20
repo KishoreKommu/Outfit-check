@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Register | Outfit Check{% endblock %}
+
+{% block content %}
+<div class="bg-white p-5 rounded shadow-lg" style="max-width: 450px; margin: auto; animation: fadeInUp 1s;">
+  <h2 class="text-center mb-4">👤 Create Your Account</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="text-center">
+      <button type="submit" class="btn btn-success w-100">Register</button>
+    </div>
+  </form>
+
+  <p class="text-center mt-3">
+    Already have an account?
+    <a href="{% url 'login' %}">Login here</a>
+  </p>
+</div>
+
+<style>
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+{% endblock %}

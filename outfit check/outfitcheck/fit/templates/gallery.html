@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Style Gallery | Outfit Check{% endblock %}
+
+{% block content %}
+<div class="container-content">
+  <div class="text-center mb-5">
+    <h1 class="text-white fw-bold" style="font-size: 2.5rem;">🌟 Explore the Style Gallery</h1>
+    <p class="text-white-50">See what the community is wearing & get inspired!</p>
+  </div>
+
+  {% if outfits %}
+  <div class="row g-4">
+    {% for outfit in outfits %}
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="card outfit-card h-100 border-0">
+        <img src="{{ outfit.image.url }}" class="card-img-top" alt="Outfit Image"
+          style="height: 250px; object-fit: cover;">
+        <div class="card-body text-white d-flex flex-column justify-content-between">
+          <div>
+            <p class="mb-1"><strong>Description:</strong> {{ outfit.description }}</p>
+            {% if outfit.rating %}
+            <p class="mb-1"><strong>Rating:</strong> {{ outfit.rating }}</p>
+            <p class="mb-1"><strong>Feedback:</strong> {{ outfit.feedback }}</p>
+            {% else %}
+            <p class="text-muted">Awaiting feedback...</p>
+            {% endif %}
+          </div>
+
+          <div class="mt-3 d-grid gap-2">
+            <a href="{% url 'outfit_result' outfit.id %}" class="btn btn-sm btn-outline-light">View Details</a>
+
+            {% if outfit.id %}
+            <form method="POST" action="{% url 'delete_outfit' outfit.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-danger w-100">Delete</button>
+            </form>
+            {% endif %}
+            
+
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="text-center text-white-50">No outfits uploaded yet. Be the first to shine!</p>
+  {% endif %}
+</div>
+
+<style>
+  .outfit-card {
+    background: rgba(0, 0, 0, 0.65);
+    border-radius: 1rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .outfit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 40px rgba(255, 255, 255, 0.1);
+  }
+
+  .outfit-card .card-body {
+    padding: 1rem;
+  }
+
+  h1,
+  p,
+  .card-text {
+    color: rgb(255, 255, 255);
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    border: none;
+  }
+
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+</style>
+{% endblock %}

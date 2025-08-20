@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Outfit Result | Outfit Check{% endblock %}
+
+{% block content %}
+<div class="card mx-auto text-white" style="max-width: 1000px; background-color: rgba(30, 30, 30, 0.9);">
+  <h2 class="text-center mb-4">🎯 Outfit Analysis Result</h2>
+
+  <div class="row g-4">
+    <div class="col-md-5">
+      <img src="{{ outfit.image.url }}" class="img-fluid rounded shadow" alt="Outfit Image" style="width: 100%; object-fit: contain;">
+    </div>
+
+    <div class="col-md-7">
+      <h4 class="mb-3">✨ <strong>Rating:</strong> {{ score }}/10</h4>
+
+      <h5 class="text-warning mt-3">📊 Why this rating?</h5>
+      <ul class="list-group list-group-flush mb-4">
+        <li class="list-group-item bg-transparent text-white"><strong>Color:</strong> {{ reasons.Color }}</li>
+        <li class="list-group-item bg-transparent text-white"><strong>Fit:</strong> {{ reasons.Fit }}</li>
+        <li class="list-group-item bg-transparent text-white"><strong>Trend:</strong> {{ reasons.Trend }}</li>
+      </ul>
+
+      <h5 class="text-info">🤖 AI-Based Analysis:</h5>
+      <ul class="mb-4" style="line-height: 1.8;">
+        {% for line in analysis %}
+          <li>{{ line }}</li>
+        {% endfor %}
+      </ul>
+
+      <h5 class="text-success">💡 Suggestions:</h5>
+      <ul class="mb-4">
+        {% for suggestion in suggestions %}
+          <li>{{ suggestion }}</li>
+        {% endfor %}
+      </ul>
+
+      <div class="text-center">
+        <a href="{% url 'dashboard' %}" class="btn btn-primary">⬅ Back to Dashboard</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

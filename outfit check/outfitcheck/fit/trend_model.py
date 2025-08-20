@@ -1,0 +1,58 @@
+import random
+
+def evaluate_trend(image_path):
+    reasons = [
+        "Outfit aligns with minimalist trends, favoring neutral tones and clean cuts.",
+        "Bold colors and oversized fit reflect current Gen-Z fashion.",
+        "Streetwear influences are prominent, especially with sneakers and hoodies.",
+        "The combination follows athleisure trends with functional fashion appeal.",
+        "Layered textures match current fashion week runways.",
+        "High-waisted bottoms and cropped tops are in-trend now.",
+        "Earth tones and relaxed silhouettes show eco-fashion influence.",
+        "Outfit matches popular K-fashion and Instagram street style.",
+        "Patterns like plaid and polka dots are trending again.",
+        "Monochrome styling is currently very fashionable.",
+        "Y2K aesthetic is back, and this outfit channels it well.",
+        "Color-blocking style is popular, and this reflects that well.",
+        "Denim-on-denim is trending and done stylishly here.",
+        "Vintage revival pieces are highly in-trend.",
+        "The minimalist Japanese style is reflected nicely here.",
+        "Cargo pants and utility wear are seeing a big comeback.",
+        "Outfit fits into the softcore aesthetic trend on social media.",
+        "Quiet luxury fashion elements are subtly present.",
+        "Oversized blazers and tailored cuts are dominating fashion weeks.",
+        "Retro vibes with modern styling—currently a hot trend.",
+        "Pop culture influences like 'Barbiecore' or 'Cottagecore' are evident.",
+        "Silk textures and flowy silhouettes mirror red carpet trends.",
+        "Matching co-ord sets are currently dominating casual fashion.",
+        "Wide-leg trousers and tucked-in shirts are making waves.",
+        "Statement accessories enhance the trendy appeal.",
+        "Nostalgic 90s elements are modernized stylishly.",
+        "Muted pastels and sage greens are top fashion colors now.",
+        "Edgy grunge inspiration is clear and on-trend.",
+        "Off-shoulder and asymmetrical cuts are currently in style.",
+        "High fashion elements balanced with comfort—perfectly trendy.",
+        "Shirt layering and open-button styles match fashion week trends.",
+        "Outfit is TikTok-trend-inspired and appeals to Gen-Z style.",
+        "Use of eco-conscious fabrics aligns with sustainability trends.",
+        "Contrasting fits—baggy pants with a fitted top—is very now.",
+        "Outfit follows popular Pinterest fashion boards.",
+        "Chunky footwear and socks-on-display are trendy right now.",
+        "Smart casual with a hint of street—fashion-forward and fresh.",
+        "Outfit resonates with K-drama fashion seen worldwide.",
+        "Neon accents and cyber-style show futuristic trend influences.",
+        "Outfit taps into global fashion fusion—a rising trend.",
+        "Layered shirts and unstructured blazers are hot in 2025 trends.",
+        "Old money aesthetic is currently very popular and visible here.",
+        "Techwear and functional fashion touches are very in-style.",
+        "Art-inspired fashion patterns give a trendy avant-garde edge.",
+        "Relaxed tailoring is a major trend in fashion editorials.",
+        "Color palette mirrors Pantone's trending colors of the year.",
+        "Statement sleeves and exaggerated proportions are fashionable.",
+        "Minimal makeup with strong outfit contrast is trending.",
+        "Sleek lines and androgynous designs reflect current runways."
+    ]
+
+    reason = random.choice(reasons)
+    score = round(random.uniform(6.5, 9.0), 1)
+    return score, reason
