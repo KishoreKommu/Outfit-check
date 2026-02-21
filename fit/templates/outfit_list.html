@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Outfit Gallery | Outfit Check{% endblock %}
+
+{% block content %}
+<div class="card mx-auto" style="max-width: 1000px;">
+  <h2 class="text-center mb-4">📸 Public Outfit Gallery</h2>
+
+  {% if outfits %}
+    <div class="row">
+      {% for outfit in outfits %}
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm">
+            <img src="{{ outfit.image.url }}" class="card-img-top" alt="Outfit Image">
+            <div class="card-body">
+              <p><strong>Description:</strong> {{ outfit.description }}</p>
+              <p><strong>Rating:</strong> {{ outfit.rating }}</p>
+              <p><strong>Feedback:</strong> {{ outfit.feedback }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-muted text-center">No outfits have been uploaded yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

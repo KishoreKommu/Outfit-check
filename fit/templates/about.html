@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% block title %}About | Outfit Check AI{% endblock %}
+
+{% block content %}
+<div class="container py-5 fade-in">
+    <div class="text-center mb-5">
+        <h1 class="fw-800 display-4" style="letter-spacing: -2px;">The <span style="color: var(--primary-pink);">Vision</span> Behind the Style</h1>
+        <p class="text-muted fw-500 mx-auto" style="max-width: 600px;">Merging cutting-edge Artificial Intelligence with high-fashion sensibilities to empower your daily confidence.</p>
+    </div>
+
+    <div class="row g-5 align-items-center mb-5">
+        <div class="col-lg-6">
+            <h2 class="fw-700 mb-4">Redefining Personal Styling</h2>
+            <p class="text-secondary lead">Outfit Check was born from a simple question: <em>"Does this look good on me?"</em></p>
+            <p class="text-muted">Traditional styling is expensive and inaccessible. We believe everyone deserves a professional second opinion. Our AI engine analyzes thousands of fashion data points—from color theory to seasonal trends—to give you objective, actionable feedback in seconds.</p>
+            
+            <div class="row mt-4 g-3">
+                <div class="col-6">
+                    <div class="p-3 border-start border-4" style="border-color: var(--accent-teal) !important; background: #fdfdfd;">
+                        <h5 class="fw-800 mb-1">98%</h5>
+                        <small class="text-muted text-uppercase fw-bold ls-1" style="font-size: 0.7rem;">Accuracy Rate</small>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 border-start border-4" style="border-color: var(--primary-pink) !important; background: #fdfdfd;">
+                        <h5 class="fw-800 mb-1">24/7</h5>
+                        <small class="text-muted text-uppercase fw-bold ls-1" style="font-size: 0.7rem;">AI Availability</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="position-relative">
+                <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80" class="img-fluid rounded-5 shadow-lg" alt="Fashion Tech">
+                <div class="position-absolute bottom-0 start-0 m-4 p-3 bg-white rounded-4 shadow-sm d-flex align-items-center gap-3 border">
+                    <div class="bg-success rounded-circle" style="width: 10px; height: 10px;"></div>
+                    <span class="small fw-700 text-dark">AI Engine Online</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-dark text-white rounded-5 p-5 mb-5 shadow-lg">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h3 class="fw-700 mb-3">The Tech Stack</h3>
+                <p class="opacity-75 mb-4">As an IT-driven project, Outfit Check utilizes a sophisticated blend of Django for the robust backend and advanced Computer Vision models for garment recognition and color analysis.</p>
+                <div class="d-flex flex-wrap gap-2">
+                    <span class="badge bg-secondary rounded-pill px-3">Django 5.0</span>
+                    <span class="badge bg-secondary rounded-pill px-3">Python AI</span>
+                    <span class="badge bg-secondary rounded-pill px-3">OpenCV</span>
+                    <span class="badge bg-secondary rounded-pill px-3">Bootstrap 5</span>
+                    <span class="badge bg-secondary rounded-pill px-3">PostgreSQL</span>
+                </div>
+            </div>
+            <div class="col-md-4 text-center mt-4 mt-md-0">
+                <i class="bi bi-cpu display-1 text-teal opacity-50"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h3 class="fw-700 text-center mb-4">Frequently Asked Questions</h3>
+            <div class="accordion border-0 shadow-sm" id="aboutAccordion">
+                <div class="accordion-item border-0 mb-2 rounded-4 overflow-hidden">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button fw-600 bg-white shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                            How does the AI rate my outfit?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#aboutAccordion">
+                        <div class="accordion-body text-muted small">
+                            Our AI uses a proprietary scoring algorithm that looks at color harmony, silhouette balance, and current fashion trends to provide a score out of 10.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item border-0 mb-2 rounded-4 overflow-hidden">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-600 bg-white shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                            Is my data private?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#aboutAccordion">
+                        <div class="accordion-body text-muted small">
+                            Absolutely. Your uploads are encrypted and stored securely. We do not share your personal style data with third-party advertisers.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-5 pt-5 border-top">
+        <p class="fw-600 text-muted mb-4">Ready to find your best look?</p>
+        <a href="{% url 'upload_outfit' %}" class="btn btn-dark btn-lg rounded-pill px-5 py-3 shadow">Join the Revolution</a>
+    </div>
+</div>
+
+<style>
+    .fw-800 { font-weight: 800; }
+    .fw-700 { font-weight: 700; }
+    .fw-600 { font-weight: 600; }
+    .ls-1 { letter-spacing: 1px; }
+    .text-teal { color: var(--accent-teal); }
+
+    .accordion-button:not(.collapsed) {
+        color: var(--primary-pink);
+        background-color: transparent;
+    }
+
+    .accordion-item {
+        border: 1px solid #f0f0f0 !important;
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeInUp 0.8s ease-out forwards; }
+</style>
+{% endblock %}

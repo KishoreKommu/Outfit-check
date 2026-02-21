@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% block title %}Home | Outfit Check{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row align-items-center mb-5 fade-in">
+        <div class="col-lg-6 text-dark py-5">
+            <div class="badge px-3 py-2 rounded-pill mb-3" style="background: rgba(78, 205, 196, 0.2); color: #008073; font-weight: 600; letter-spacing: 1px;">
+                <i class="bi bi-cpu-fill me-2"></i>AI-POWERED FASHION
+            </div>
+            <h1 class="display-3 fw-bold mb-4" style="line-height: 1.1;">Dress to <span style="color: var(--primary-pink);">Impress</span> with AI Feedback</h1>
+            <p class="lead text-secondary mb-5 fs-4">Join 2,000+ style enthusiasts using AI to perfect their wardrobe and build confidence daily.</p>
+            
+            <div class="d-flex gap-3">
+                <a class="btn btn-custom-primary btn-lg shadow px-4 py-3" href="{% url 'upload_outfit' %}">
+                    <i class="bi bi-camera-fill me-2"></i>Scan My Outfit
+                </a>
+                <a class="btn btn-outline-dark btn-lg px-4 py-3" href="{% url 'outfit_list' %}">
+                    <i class="bi bi-grid-3x3-gap me-2"></i>Browse Gallery
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-6 d-none d-lg-block">
+            <div class="hero-image-container p-4" style="background: var(--main-gradient); border-radius: 40px; transform: rotate(2deg);">
+                <div class="bg-white p-2 rounded-4 shadow-lg" style="transform: rotate(-2deg);">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80" class="img-fluid rounded-4" alt="Fashion Concept">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-3">
+            <div class="card p-4 text-center border-0 shadow-sm">
+                <div class="fs-2 mb-2" style="color: var(--primary-pink);"><i class="bi bi-lightning-charge-fill"></i></div>
+                <h4 class="fw-bold mb-0">8.5/10</h4>
+                <small class="text-muted">Avg. Style Score</small>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-4 text-center border-0 shadow-sm">
+                <div class="fs-2 mb-2" style="color: var(--accent-teal);"><i class="bi bi-image"></i></div>
+                <h4 class="fw-bold mb-0">24</h4>
+                <small class="text-muted">Outfits Rated</small>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-4 text-center border-0 shadow-sm">
+                <div class="fs-2 mb-2" style="color: #6c5ce7;"><i class="bi bi-trophy-fill"></i></div>
+                <h4 class="fw-bold mb-0">Top 5%</h4>
+                <small class="text-muted">Global Ranking</small>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-4 text-center border-0 shadow-sm">
+                <div class="fs-2 mb-2 text-warning"><i class="bi bi-fire"></i></div>
+                <h4 class="fw-bold mb-0">7 Days</h4>
+                <small class="text-muted">Style Streak</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title text-center mb-5">
+        <h2 class="fw-bold">How It Works</h2>
+        <p class="text-muted">The smarter way to build your personal brand.</p>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="feature-card p-4 bg-white shadow-sm rounded-4 h-100">
+                <div class="icon-box mb-3 rounded-3 d-inline-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background: rgba(255, 107, 107, 0.1); color: var(--primary-pink);">
+                    <i class="bi bi-cloud-upload fs-4"></i>
+                </div>
+                <h5>Instant Upload</h5>
+                <p class="text-muted">Simply snap a photo of your outfit and our AI handles the rest in seconds.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card p-4 bg-white shadow-sm rounded-4 h-100">
+                <div class="icon-box mb-3 rounded-3 d-inline-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background: rgba(78, 205, 196, 0.1); color: var(--accent-teal);">
+                    <i class="bi bi-palette fs-4"></i>
+                </div>
+                <h5>Color Analysis</h5>
+                <p class="text-muted">Our engine checks for color harmony and suggests better combinations.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card p-4 bg-white shadow-sm rounded-4 h-100">
+                <div class="icon-box mb-3 rounded-3 d-inline-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background: rgba(108, 92, 231, 0.1); color: #6c5ce7;">
+                    <i class="bi bi-chat-heart fs-4"></i>
+                </div>
+                <h5>Smart Suggestions</h5>
+                <p class="text-muted">Get AI-generated tips on accessories, fit, and seasonal trends.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Professional Typography & Effects */
+    .display-3 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        letter-spacing: -1px;
+    }
+
+    .feature-card {
+        border: 1px solid rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-8px);
+        background: white;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+        border-color: var(--accent-teal);
+    }
+
+    .fade-in {
+        animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-image-container {
+        transition: transform 0.5s ease;
+    }
+
+    .hero-image-container:hover {
+        transform: rotate(0deg) scale(1.02) !important;
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+{% endblock %}

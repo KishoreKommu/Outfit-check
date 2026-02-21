@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block title %}Join the Style Revolution | Outfit Check{% endblock %}
+
+{% block content %}
+<div class="container py-5 fade-in">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-9">
+            <div class="card border-0 shadow-lg overflow-hidden" style="border-radius: 30px; min-height: 600px;">
+                <div class="row g-0 h-100">
+                    
+                    <div class="col-md-5 d-none d-md-flex flex-column justify-content-center p-5 text-white position-relative" 
+                         style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80'); background-size: cover; background-position: center;">
+                        <div class="position-relative z-index-1">
+                            <h2 class="fw-800 display-6 mb-4">Your Style <br>Journey Starts <br>Here.</h2>
+                            <p class="opacity-75 lead small">Join a global community of style enthusiasts and let AI perfect your wardrobe.</p>
+                            
+                            <div class="mt-5">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="bi bi-check-circle-fill text-teal me-2"></i>
+                                    <span class="small fw-600">Personalized Style Scores</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="bi bi-check-circle-fill text-teal me-2"></i>
+                                    <span class="small fw-600">Color Palette Analysis</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-check-circle-fill text-teal me-2"></i>
+                                    <span class="small fw-600">Wardrobe Management</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-7 bg-white p-4 p-lg-5 d-flex flex-column justify-content-center">
+                        <div class="mb-4">
+                            <h3 class="fw-800 mb-1">Create Account</h3>
+                            <p class="text-muted small">Start your 7-day free trial of Style Pro features.</p>
+                        </div>
+
+                        <form method="post" class="auth-form">
+                            {% csrf_token %}
+                            
+                            {% for field in form %}
+                            <div class="mb-3">
+                                <label class="form-label small fw-700 text-uppercase ls-1 text-muted">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    {% for error in field.errors %}
+                                        <div class="text-danger x-small mt-1"><i class="bi bi-exclamation-circle me-1"></i>{{ error }}</div>
+                                    {% endfor %}
+                                {% endif %}
+                                {% if field.help_text %}
+                                    <div class="text-muted x-small mt-1">{{ field.help_text|safe }}</div>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+
+                            <div class="d-grid mt-4">
+                                <button type="submit" class="btn btn-dark btn-lg rounded-pill fw-700 py-3 shadow-sm transition-transform">
+                                    Create My Profile
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="text-center mt-4 pt-3 border-top">
+                            <p class="text-muted small">Already a member? 
+                                <a href="{% url 'login' %}" class="text-primary-pink fw-700 text-decoration-none ms-1">Sign In</a>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <p class="x-small text-muted opacity-50">
+                    By registering, you agree to our <strong>Terms of Service</strong> and <strong>Privacy Policy</strong>.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Styling variables inherited from base.html */
+    .fw-800 { font-weight: 800; }
+    .fw-700 { font-weight: 700; }
+    .fw-600 { font-weight: 600; }
+    .ls-1 { letter-spacing: 1px; }
+    .x-small { font-size: 0.75rem; }
+    .text-teal { color: var(--accent-teal); }
+    .text-primary-pink { color: var(--primary-pink); }
+
+    /* Form Control Overrides */
+    .auth-form input {
+        display: block;
+        width: 100%;
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #f8fafc;
+        background-clip: padding-box;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .auth-form input:focus {
+        background-color: #fff;
+        border-color: var(--primary-pink);
+        outline: 0;
+        box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.1);
+    }
+
+    /* Animation & Transitions */
+    .fade-in {
+        animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .transition-transform:hover {
+        transform: translateY(-2px);
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+        .card { border-radius: 20px; }
+    }
+</style>
+{% endblock %}

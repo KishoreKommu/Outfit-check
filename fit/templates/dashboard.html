@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard | Outfit Check AI{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row align-items-center mb-5 fade-in">
+        <div class="col-md-7">
+            <h1 class="fw-800 mb-1" style="letter-spacing: -1px;">Studio <span style="color: var(--primary-pink);">Dashboard</span></h1>
+            <p class="text-muted fw-500">Welcome back, {{ request.user.username }}. Your style evolution is looking sharp.</p>
+        </div>
+        <div class="col-md-5 text-md-end mt-3 mt-md-0">
+            <div class="btn-group shadow-sm rounded-pill overflow-hidden">
+                <a href="{% url 'upload_outfit' %}" class="btn btn-dark px-4 py-2 fw-600 border-0">
+                    <i class="bi bi-plus-lg me-2"></i>New Scan
+                </a>
+                <a href="{% url 'outfit_list' %}" class="btn btn-white px-4 py-2 fw-600 border-0" style="background: white;">
+                    <i class="bi bi-grid me-2"></i>Gallery
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-lg-3 col-6">
+            <div class="stat-card p-4 border-0 shadow-sm bg-white rounded-4 h-100 position-relative overflow-hidden">
+                <div class="position-absolute top-0 end-0 p-3 opacity-10">
+                    <i class="bi bi-layers-fill display-4 text-dark"></i>
+                </div>
+                <h6 class="text-uppercase text-muted fw-700 small mb-2 ls-1">Library</h6>
+                <h2 class="fw-800 mb-0">{{ outfits.count }} <span class="fs-6 fw-400 text-muted">Items</span></h2>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="stat-card p-4 border-0 shadow-sm bg-white rounded-4 h-100 position-relative overflow-hidden">
+                <div class="position-absolute top-0 end-0 p-3 opacity-10">
+                    <i class="bi bi-lightning-charge-fill display-4 text-warning"></i>
+                </div>
+                <h6 class="text-uppercase text-muted fw-700 small mb-2 ls-1">Avg Score</h6>
+                <h2 class="fw-800 mb-0">{% if avg_rating %}{{ avg_rating }}{% else %}0.0{% endif %}<span class="fs-6 fw-400 text-muted">/10</span></h2>
+            </div>
+        </div>
+        <div class="col-lg-6 col-12">
+            <div class="stat-card p-4 border-0 shadow-sm bg-white rounded-4 h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6 class="text-uppercase text-muted fw-700 small ls-1 mb-0">Style Proficiency</h6>
+                    <span class="badge bg-soft-teal text-teal rounded-pill">Level 2: Stylist</span>
+                </div>
+                <div class="progress rounded-pill mb-2" style="height: 10px; background: #f0f0f0;">
+                    <div class="progress-bar" role="progressbar" style="width: 65%; background: var(--accent-teal); border-radius: 10px;"></div>
+                </div>
+                <div class="d-flex justify-content-between small text-muted fw-600">
+                    <span>350 XP to Next Level</span>
+                    <span>65%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="section-header d-flex align-items-center justify-content-between mb-4">
+                <h5 class="fw-800 mb-0">Recent Evaluations</h5>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-light rounded-pill px-3 dropdown-toggle border-0" type="button" data-bs-toggle="dropdown">
+                        Latest First
+                    </button>
+                </div>
+            </div>
+
+            {% if outfits %}
+            <div class="activity-stack">
+                {% for outfit in outfits|slice:":4" %}
+                <div class="activity-item card border-0 shadow-sm mb-3 rounded-4 p-3 transition-transform">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <div class="image-wrapper rounded-3 overflow-hidden shadow-sm" style="width: 85px; height: 85px;">
+                                <img src="{{ outfit.image.url }}" class="w-100 h-100" style="object-fit: cover;">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-between align-items-start mb-1">
+                                <h6 class="fw-700 mb-0 text-dark">{{ outfit.description|truncatechars:35 }}</h6>
+                                <span class="small text-muted fw-500"><i class="bi bi-calendar3 me-1"></i>{{ outfit.uploaded_at|date:"M d" }}</span>
+                            </div>
+                            <p class="text-muted small mb-2 fw-500">Evaluated by StyleAI Engine v2.4</p>
+                            <div class="d-flex align-items-center gap-3">
+                                <a href="{% url 'outfit_result' outfit.id %}" class="text-decoration-none small fw-700 text-primary-pink">
+                                    Full Report <i class="bi bi-arrow-right-short"></i>
+                                </a>
+                                <form method="post" action="{% url 'delete_outfit' outfit.id %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn p-0 text-muted small fw-600 border-0 bg-transparent">Remove</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-auto text-center border-start ps-4 pe-3 d-none d-md-block">
+                            <div class="h5 fw-800 mb-0" style="color: {% if outfit.rating > 7 %}var(--accent-teal){% else %}var(--primary-pink){% endif %};">
+                                {% if outfit.rating %}{{ outfit.rating }}{% else %}--{% endif %}
+                            </div>
+                            <div class="small text-uppercase fw-700 text-muted ls-1" style="font-size: 10px;">Score</div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-state text-center py-5 rounded-4 border-2 border-dashed bg-white">
+                <img src="https://cdn-icons-png.flaticon.com/512/4076/4076432.png" width="120" class="mb-4 opacity-50">
+                <h5 class="fw-700">No Style Data Yet</h5>
+                <p class="text-muted px-5">Upload your first outfit to get AI-powered insights on your fit, color, and aesthetic.</p>
+                <a href="{% url 'upload_outfit' %}" class="btn btn-custom-primary rounded-pill px-4 mt-2">Start First Scan</a>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm bg-white rounded-4 p-4 mb-4">
+                <h6 class="fw-800 text-dark mb-3">Trending Aesthetic</h6>
+                <div class="trend-visual rounded-3 mb-3" style="height: 140px; background: url('https://images.unsplash.com/photo-1539109132314-34a6562d3295?auto=format&fit=crop&w=500&q=60'); background-size: cover; background-position: center;"></div>
+                <h6 class="fw-700 mb-1">Monochrome Minimal</h6>
+                <p class="text-muted small mb-3">Clean lines and single-color palettes are currently scoring 15% higher in AI evaluations.</p>
+                <a href="#" class="btn btn-light w-100 rounded-pill btn-sm fw-600">Read Style Guide</a>
+            </div>
+
+            <div class="card border-0 p-4 text-white rounded-4 position-relative overflow-hidden" style="background: var(--glass-dark); min-height: 200px;">
+                <div class="position-relative z-index-1">
+                    <div class="badge bg-primary-pink mb-3">NEW</div>
+                    <h5 class="fw-700 mb-2">Color Theory 101</h5>
+                    <p class="small text-white-50 mb-4">Master the art of the color wheel to boost your style score.</p>
+                    <button class="btn btn-outline-light btn-sm rounded-pill px-4 fw-600">Start Lesson</button>
+                </div>
+                <i class="bi bi-palette-fill position-absolute bottom-0 end-0 p-3 display-1 opacity-10"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Professional Layout Overrides */
+    .fw-800 { font-weight: 800; }
+    .fw-700 { font-weight: 700; }
+    .fw-600 { font-weight: 600; }
+    .fw-500 { font-weight: 500; }
+    .ls-1 { letter-spacing: 1px; }
+    
+    .bg-soft-teal { background: rgba(78, 205, 196, 0.15); }
+    .text-teal { color: #008073; }
+    .text-primary-pink { color: var(--primary-pink); }
+
+    .activity-item {
+        border: 1px solid transparent !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .activity-item:hover {
+        transform: translateX(10px);
+        border-color: rgba(255, 107, 107, 0.1) !important;
+        background: #fdfdfd;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.04) !important;
+    }
+
+    .stat-card {
+        border: 1px solid #f0f0f0 !important;
+    }
+
+    .border-dashed { border-style: dashed !important; border-color: #dee2e6 !important; }
+
+    /* Custom Transitions */
+    .btn { transition: all 0.2s ease-in-out; }
+    .btn:active { transform: scale(0.95); }
+</style>
+{% endblock %}
